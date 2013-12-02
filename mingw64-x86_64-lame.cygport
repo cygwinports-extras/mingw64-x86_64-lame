@@ -1,0 +1,37 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross
+
+NAME="mingw64-x86_64-lame"
+VERSION=3.99.5
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="MP3 encoder library for Win64 toolchain"
+DESCRIPTION="LAME is a LGPL MP3 encoder, with speed and quality to rival and
+often surpass all commercial competitiors."
+HOMEPAGE="http://lame.sourceforge.net/"
+SRC_URI="mirror://sourceforge/lame/lame-${VERSION}.tar.gz"
+SRC_DIR="lame-${VERSION}"
+
+CYGCONF_ARGS="
+	--enable-nasm
+	--disable-frontend
+	--disable-mp3rtp
+	--disable-mp3x
+	--disable-debug
+"
+
+src_compile() {
+	cd ${S}
+	cygautoreconf
+	cd ${B}
+	cygconf
+	mkdir -p libmp3lame/i386/.libs	# fix parallel make
+	cygmake
+}
+
+src_install() {
+	cd ${B}
+	cyginstall pkghtml_DATA= man_MANS=
+}
+
+KEEP_LA_FILES="none"
