@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-x86_64-lame"
 VERSION=3.99.5
-RELEASE=1
+RELEASE=3
 CATEGORY="Devel"
 SUMMARY="MP3 encoder library for Win64 toolchain"
 DESCRIPTION="LAME is a LGPL MP3 encoder, with speed and quality to rival and
@@ -33,5 +33,3 @@ src_install() {
 	cd ${B}
 	cyginstall pkghtml_DATA= man_MANS=
 }
-
-KEEP_LA_FILES="none"
